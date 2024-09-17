@@ -54,7 +54,7 @@ export default function Main() {
   }, []);
 
   return (
-    <div className="w-full max-w-[1440px] mx-auto">
+    <div className="w-full px-4 flex flex-col gap-4 justify-center max-w-[1440px] mx-auto">
       {/* Modalni ko'rsatish */}
       {dataObj && (
         <div className="fixed z-50 w-full h-screen bg-[rgba(0,0,0,0.9)] top-0 left-0 flex justify-center items-center modal-bg">
@@ -134,43 +134,44 @@ export default function Main() {
       </div>
 
       {/* Davlat kartalari */}
-      <div className="grid grid-cols-5 gap-5">
-        {filteredCountries.length > 0 ? (
-          filteredCountries.map((country, index) => (
-            <div
-              key={index}
-              className="max-w-sm h-[380px] pb-3 bg-gradient-to-b from-gray-800 via-gray-900 to-black border border-gray-700 rounded-lg shadow-lg transform hover:scale-105 transition-transform"
-            >
-              <div className="w-full h-1/2">
-                <img
-                  className="rounded-t-lg w-full h-full "
-                  src={country.flags.png}
-                  alt={country.name.common}
-                />
-              </div>
-              <div className="px-4 h-1/2 flex flex-col gap-4 items-start justify-center">
-                <h5 className="text-[16px] h-[50px] flex justify-center items-center font-bold tracking-tight text-gray-200">
-                  {country.name.common}
-                </h5>
-                <p className="font-normal text-gray-400">
-                  Region: {country.region}
-                </p>
-                <p className="font-normal text-gray-400">
-                  Population: {country.population.toLocaleString()}
-                </p>
-                <button
-                  onClick={() => dataInfo(index)}
-                  className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-purple-600 rounded-lg hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300"
-                >
-                  Read more
-                </button>
-              </div>
-            </div>
-          ))
-        ) : (
-          <p>Yuklanmoqda...</p>
-        )}
+      <div className="grid mx-auto  grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5">
+  {filteredCountries.length > 0 ? (
+    filteredCountries.map((country, index) => (
+      <div
+        key={index}
+        className="max-w-sm h-[380px] pb-3 bg-gradient-to-b from-gray-800 via-gray-900 to-black border border-gray-700 rounded-lg shadow-lg transform hover:scale-105 transition-transform flex flex-col"
+      >
+        <div className="w-full h-1/2">
+          <img
+            className="rounded-t-lg w-full h-full object-cover"
+            src={country.flags.png}
+            alt={country.name.common}
+          />
+        </div>
+        <div className="px-4 h-1/2 flex flex-col gap-4 items-start justify-center">
+          <h5 className="text-[16px] h-[50px] flex justify-center items-center font-bold tracking-tight text-gray-200">
+            {country.name.common}
+          </h5>
+          <p className="font-normal text-gray-400">
+            Region: {country.region}
+          </p>
+          <p className="font-normal text-gray-400">
+            Population: {country.population.toLocaleString()}
+          </p>
+          <button
+            onClick={() => dataInfo(index)}
+            className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-purple-600 rounded-lg hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300"
+          >
+            Read more
+          </button>
+        </div>
       </div>
+    ))
+  ) : (
+    <p>Yuklanmoqda...</p>
+  )}
+</div>
+
     </div>
   );
 }
